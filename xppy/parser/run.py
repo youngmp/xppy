@@ -34,8 +34,9 @@ from xppy.utils.output import Output
 tmp_name = '__tmp__'
 tmp_ode  = tmp_name+'.ode'
 tmp_set  = tmp_name+'.set'
+tmp_output = 'output.dat'
 
-def run(ode_file=tmp_ode, set_file=tmp_set, verbose=False):
+def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=False):
     ''' 
     Function runs xppaut with the given ode_file and, optionally, set_file and
     returns the output of the simulation.
@@ -53,8 +54,9 @@ def run(ode_file=tmp_ode, set_file=tmp_set, verbose=False):
             c = c+' > /dev/null'
         elif os.name == 'nt':
             c = c+' > NUL'
-    os.system(c)
-    return Output(ode_file)
+    os.system(c)   
+    shutil.move("output.dat", output_file)
+    return Output(ode_file,output_file)
 
 def runLast(last_out=None, ode_file=tmp_ode, set_file=tmp_set, verbose=False):
     ''' 
@@ -105,3 +107,6 @@ def cleanUp():
     deleteTmp()
     if os.path.exists('output.dat'):
         os.remove('output.dat')
+
+
+
