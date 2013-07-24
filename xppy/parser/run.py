@@ -28,6 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 import os
 import shutil
+import tempfile
 from xppy.parser import parse
 from xppy.utils.output import Output
 
@@ -44,8 +45,10 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
     '''
     if not os.path.exists(ode_file):
         raise IOError('No such file or directory: '+ode_file)
-
-    c = 'xppaut '+ode_file+' -silent'
+    temp_ode = os.path.join(tempfile.gettempdir(), 'temp_ode') # copy ode to temp dir
+    shutil.copy2(ode_file, temp_ode) # copy ode to temp dir (2)
+    # xpp does not like long file paths, so we need to copy ode file to temp dir
+    c = 'xppaut '+temp_ode+' -silent'
     if os.path.exists(set_file):
         c = c+' -setfile '+set_file
     # By default XPP stdio is not displayed
@@ -55,6 +58,10 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
         elif os.name == 'nt':
             c = c+' > NUL'
     os.system(c)   
+    try:
+        os.remove(temp_ode)
+    except Exception, e:
+        print e
     shutil.move("output.dat", output_file)
     return Output(ode_file,output_file)
 
