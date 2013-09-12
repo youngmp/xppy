@@ -26,6 +26,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
+import pdb
 import os
 import shutil
 import tempfile
@@ -45,23 +46,21 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
     '''
     if not os.path.exists(ode_file):
         raise IOError('No such file or directory: '+ode_file)
-    temp_ode = os.path.join(tempfile.gettempdir(), 'temp_ode') # copy ode to temp dir
-    shutil.copy2(ode_file, temp_ode) # copy ode to temp dir (2)
-    # xpp does not like long file paths, so we need to copy ode file to temp dir
-    c = 'xppaut '+temp_ode+' -silent'
-    if os.path.exists(set_file):
-        c = c+' -setfile '+set_file
-    # By default XPP stdio is not displayed
-    if not verbose:
-        if os.name in ['posix','mac']:
-            c = c+' > /dev/null'
-        elif os.name == 'nt':
-            c = c+' > NUL'
-    os.system(c)   
-    try:
-        os.remove(temp_ode)
-    except Exception, e:
-        print e
+    #pdb.set_trace()
+    with tempfile.NamedTemporaryFile() as temp:
+      temp.write(open(ode_file).read())
+      temp.flush()
+    #shutil.copy(ode_file,)
+      c = 'xppaut '+temp.name+' -silent'
+      if os.path.exists(set_file):
+          c = c+' -setfile '+set_file
+      # By default XPP stdio is not displayed
+      if not verbose:
+          if os.name in ['posix','mac']:
+              c = c+' > /dev/null'
+          elif os.name == 'nt':
+              c = c+' > NULL'
+      os.system(c)   
     shutil.move("output.dat", output_file)
     return Output(ode_file,output_file)
 
