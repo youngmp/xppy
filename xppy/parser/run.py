@@ -47,6 +47,9 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
     if not os.path.exists(ode_file):
         raise IOError('No such file or directory: '+ode_file)
     #pdb.set_trace()
+    # change to temporary dir
+    tmpdirpath = tempfile.mkdtemp()
+    os.chdir(tmpdirpath)
     with tempfile.NamedTemporaryFile() as temp:
       temp.write(open(ode_file).read())
       temp.flush()
@@ -60,8 +63,10 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
               c = c+' > /dev/null'
           elif os.name == 'nt':
               c = c+' > NULL'
-      os.system(c)   
+      os.system(c)
+    #print tmpdirpath   
     shutil.move("output.dat", output_file)
+    shutil.rmtree(tmpdirpath)
     return Output(ode_file,output_file)
 
 def runLast(last_out=None, ode_file=tmp_ode, set_file=tmp_set, verbose=False):
