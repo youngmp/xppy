@@ -49,7 +49,8 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
     #pdb.set_trace()
     # change to temporary dir
     tmpdirpath = tempfile.mkdtemp()
-    os.chdir(tmpdirpath)
+    cwd = os.getcwd()
+    os.chdir(tmpdirpath) 
     with tempfile.NamedTemporaryFile() as temp:
       temp.write(open(ode_file).read())
       temp.flush()
@@ -65,7 +66,8 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
               c = c+' > NULL'
       os.system(c)
     #print tmpdirpath   
-    shutil.move("output.dat", output_file)
+    shutil.move("output.dat", output_file) 
+    os.chdir(cwd)    
     shutil.rmtree(tmpdirpath)
     return Output(ode_file,output_file)
 
