@@ -38,7 +38,7 @@ def change_ode(ode_file=tmp_ode, new_pars=[]):
     Function changes the parameters and initial conditions specified in
     new_pars in given ode_file. 
     '''
-    print('Warning! Function is obsolete, use changeOde instead!')
+    print 'Warning! Function is obsolete, use changeOde instead!'
     changeOde(new_pars, ode_file)
 
 def changeOde(new_pars, ode_file=tmp_ode):
@@ -177,7 +177,7 @@ def change_set(set_file, new_pars):
     Function changes the parameters and initial conditions specified in
     new_pars in given ode_file. 
     '''
-    print('Warning! Function is obsolete, use changeSet instead!')
+    print 'Warning! Function is obsolete, use changeSet instead!'
     changeSet(new_pars, set_file)
    
 def changeSet(new_pars, set_file=tmp_set):
@@ -296,7 +296,7 @@ def comparePars(pars1, pars2):
         d2 = dict(p2[p2[:,0]==tp,1:])
         # Creating list of all keys
         keys = list(d1.keys())
-        for v in list(d2.keys()):
+        for v in d2.keys():
             try:
                 keys.index(v)
             except ValueError:

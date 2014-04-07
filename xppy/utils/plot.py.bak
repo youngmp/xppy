@@ -139,7 +139,7 @@ def plotLC(data, cols=[0,1], axes=None, colormap=None):
     if len(cols) != 2:
         raise ValueError('List should contain to columns!')
 
-    sec = list(zip(data[:-1,cols],data[1:,cols]))
+    sec = zip(data[:-1,cols],data[1:,cols])
     cm = pl.cm.get_cmap(colormap)
     c = cm(np.linspace(0,1,data.shape[0]))
     lc = LineCollection(sec, color=c)
