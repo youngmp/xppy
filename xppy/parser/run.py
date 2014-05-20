@@ -56,6 +56,7 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
       temp.flush()
     #shutil.copy(ode_file,)
       c = 'xppaut '+temp.name+' -silent'
+      #print(c)
       if os.path.exists(set_file):
           c = c+' -setfile '+set_file
       # By default XPP stdio is not displayed
@@ -66,8 +67,9 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
               c = c+' > NULL'
       os.system(c)
     #print tmpdirpath   
-    shutil.move("output.dat", output_file) 
-    os.chdir(cwd)    
+    #print(output_file)
+    os.chdir(cwd)
+    shutil.copy("%s/output.dat"%tmpdirpath, output_file) 
     shutil.rmtree(tmpdirpath)
     return Output(ode_file,output_file)
 

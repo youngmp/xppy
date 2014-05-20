@@ -34,7 +34,8 @@ class Output:
     '''
     Class stores and manages data from XPPAut output data file.
     '''
-    def __init__(self, ode_file='', file_name='output.dat'):
+    def __init__(self, ode_file, file_name):
+        #print(file_name)
         '''
         Constructor
         '''
@@ -43,10 +44,10 @@ class Output:
         
         if os.path.exists(file_name):
             self.__raw_data = np.loadtxt(file_name)
+            #print(self.__raw_data)
         
         if os.path.exists(ode_file):
             self.__desc = parse.readOdeVars(ode_file)
-        
     
     def loadRawData(self, file_name='output.dat'):
         '''
@@ -137,3 +138,6 @@ class Output:
         ret += '\nData:\n'+str(self.__raw_data)
         
         return ret
+
+
+

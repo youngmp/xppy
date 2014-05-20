@@ -168,7 +168,6 @@ def readOdeVars(ode_file=tmp_ode):
             desc.append([n,i]); desc.append([i,n]); i += 1
         else:
             continue
-    
     return dict(desc)
 
 
