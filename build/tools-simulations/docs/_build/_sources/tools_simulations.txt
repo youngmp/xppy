@@ -1,0 +1,53 @@
+tools_simulations package
+=========================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    tools_simulations.tests
+
+Submodules
+----------
+
+tools_simulations.aligntailbud module
+-------------------------------------
+
+.. automodule:: tools_simulations.aligntailbud
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+tools_simulations.jinjaxpp module
+---------------------------------
+
+.. automodule:: tools_simulations.jinjaxpp
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+tools_simulations.myImshow module
+---------------------------------
+
+.. automodule:: tools_simulations.myImshow
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+tools_simulations.xppDat2hyperDimNumpy module
+---------------------------------------------
+
+.. automodule:: tools_simulations.xppDat2hyperDimNumpy
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: tools_simulations
+    :members:
+    :undoc-members:
+    :show-inheritance:

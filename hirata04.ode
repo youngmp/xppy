@@ -1,0 +1,26 @@
+# delayed feedback delay.ode
+
+# declare all the parameters, initializing the delay to 3
+par a=4.5,k=33,
+par taup=20,taum=3
+par pcrit=40,n=2
+par tm=29,tp=8
+
+# norm
+
+# define the nonlinearity
+f(p)=1/(1+(p/pcrit)**n)
+
+# define the right-hand sides; delaying x by tau
+dp/dt = a*delay(m,tp)-(ln(2)/taup)*p
+dm/dt = k*f(delay(p,tm)) - (ln(2)/taum)*m
+#dl/dt = k*f(x1) - (ln(2)/taum)*l
+
+# integration
+@ total=1500,xhi=1500
+@ maxstor=3000000,delay=100,bound=1000000
+# plot
+@ nplots=2,xp=t,yp=p,yp2=m
+@ xlo=200,ylo=0,yhi=700
+done
+

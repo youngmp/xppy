@@ -14,12 +14,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with XPPy.  If not, see <http://www.gnu.org/licenses/>.
 '''
-#from distutils.core import setup
-from xppy import __version__
-
-import os
-from setuptools import setup
-
+from distutils.core import setup
+from xppy import __version__ 
 
 setup(name='xppy',
       version=__version__,
