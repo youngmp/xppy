@@ -39,6 +39,13 @@ Moreover, every object contains docstring, which more or less explains
 its purpose.
 
 #################
+# USAGE #
+#################
+
+from xppy import parser
+out = parser.run(ode_file="mymodel.ode"); out['x'][1] # get 2nd value of x vector
+
+#################
 # INSTALLATION  #
 #################
 Before you install XPPy you should install NumPy, which is extensively used 
