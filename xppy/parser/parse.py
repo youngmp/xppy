@@ -146,14 +146,26 @@ def readOdeVars(ode_file=tmp_ode):
         # dname/dt
         elif line.find('/dt') > 0:
             n = line[1:line.find('/dt')]
-            desc.append([n,i]); desc.append([i,n]);  i += 1
         # name' or name(t+1)
         elif line.find("'") > 0:
             n = line[0:line.find("'")]
-            desc.append([n,i]); desc.append([i,n]);  i += 1
         elif line.find('(t+1)') > 0:
             n = line[0:line.find('(t+1)')]
-            desc.append([n,i]); desc.append([i,n]); i += 1
+        #Parse Arrays (which add '[indstart..indstop]' on end of 
+        #variable name)
+        if n.find('[')>0:
+            indxstr=n[n.find('[')+1:n.find(']')]
+            name_base=n[:n.find('[')]
+            indx=[int(x) for x in indxstr.split('.') if x]
+            for j in range(indx[0],indx[1]+1):
+                desc.append([name_base+str(j),i])
+
+                desc.append([i,name_base+str(j)])
+                i+=1
+        else:
+            desc.append([n,i])
+            desc.append([i,n])
+            i+= 1
         else:
             continue
     # Auxiliary vars are later in data file, so need second run
