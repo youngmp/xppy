@@ -160,12 +160,9 @@ def readOdeVars(ode_file=tmp_ode):
             name_base=n[:n.find('[')]
             indx=[int(x) for x in indxstr.split('.') if x]
             for j in range(indx[0],indx[1]+1):
-                desc.append([name_base+str(j),i])
-
                 desc.append([i,name_base+str(j)])
                 i+=1
         else:
-           
             desc.append([i,n])
             i+= 1
 
@@ -181,7 +178,7 @@ def readOdeVars(ode_file=tmp_ode):
             desc.append([n,i]); desc.append([i,n]); i += 1
         else:
             continue
-    
+    desc.extend([[d[1],d[0]] for d in desc])
     return dict(desc)
 
 
