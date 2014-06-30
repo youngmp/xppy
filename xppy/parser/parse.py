@@ -151,6 +151,8 @@ def readOdeVars(ode_file=tmp_ode):
             n = line[0:line.find("'")]
         elif line.find('(t+1)') > 0:
             n = line[0:line.find('(t+1)')]
+        else:
+            continue
         #Parse Arrays (which add '[indstart..indstop]' on end of 
         #variable name)
         if n.find('[')>0:
@@ -163,11 +165,10 @@ def readOdeVars(ode_file=tmp_ode):
                 desc.append([i,name_base+str(j)])
                 i+=1
         else:
-            desc.append([n,i])
+           
             desc.append([i,n])
             i+= 1
-        else:
-            continue
+
     # Auxiliary vars are later in data file, so need second run
     for line in list(lines):
         # Check the type of the current line
