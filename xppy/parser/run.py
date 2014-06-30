@@ -50,6 +50,9 @@ def run(ode_file=tmp_ode, output_file=tmp_output, set_file=tmp_set, verbose=Fals
     # change to temporary dir
     tmpdirpath = tempfile.mkdtemp()
     cwd = os.getcwd()
+    ode_file=os.path.abspath(ode_file)
+    set_file=os.path.abspath(set_file)
+    output_file=os.path.abspath(output_file)
     os.chdir(tmpdirpath) 
     with tempfile.NamedTemporaryFile() as temp:
       temp.write(open(ode_file).read())
