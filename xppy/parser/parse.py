@@ -46,15 +46,22 @@ def changeOde(new_pars, ode_file=tmp_ode):
     Function changes the parameters, initial conditions and options specified in
     new_pars in given ode_file. 
     '''
+
+
     # Copy the new_pars list
     pars = list(new_pars)
+
     # Check if the pars is a single list or list of lists
     if type(pars[0]) is not list:
         pars = [pars] # Make list of lists (for for loop below)
+        
+
+        
     # Reading the file
     # If file doesn't exist, Python throws exception by itself
     f = open(ode_file, 'r')
     lines = f.readlines()
+
     f.close()
     
     for line in list(lines):

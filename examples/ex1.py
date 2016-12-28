@@ -1,3 +1,8 @@
+"""
+This file demonstrates how to extract parameter names and values, and variable names and values.
+Currently, any variable line initialized with 'par, init, @' are considered parameters.
+"""
+
 import xppy
 import matplotlib.pyplot as plt
 
@@ -23,6 +28,8 @@ print xppy.readOdeVars('simple.ode')
 
 # read ODE params
 print xppy.readOdePars('simple.ode')
+
+#-----------------------------------------------------------------------
 
 # plot output
 # only the column names need to be known to assign them to a dedicated variable
