@@ -43,6 +43,7 @@ class AllInfo:
         self.__raw_data = None
         self.__branches = []
         self.noVar = 0
+
         # If file name is given try to load the file  
         if file_name != None and os.path.exists(file_name):
             self.__raw_data = np.loadtxt(file_name)
@@ -85,7 +86,7 @@ class AllInfo:
         '''
         if self.__raw_data == None:
             return False
-        
+
         # Scan file for branches
         bl = []
         for b in self.__raw_data[:,1]:
@@ -96,6 +97,7 @@ class AllInfo:
             if i == -1:
                 bl.append(b)
         self.__branches = sorted(bl)
+
         return True
 
     def findParts(self, branchArr):
@@ -114,6 +116,7 @@ class AllInfo:
         '''
         Branches getter
         '''
+
         if len(self.__branches) == 0:
             self.findBranches()
 

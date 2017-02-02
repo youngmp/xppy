@@ -91,13 +91,15 @@ def plotDiag(file_name, axes = None, tr_file='', tr_cols=[],
         ax = f.add_subplot(111)
     else:
         ax = axes
+
     # read the data file for second (right) fpo continuation
     ai = allinfo.AllInfo(file_name)
     bl = ai.getBranches()
     #print 'branches: ',bl
     # color setup
-    c = ['','-k','-r','-b','-m']
+    c = ['-b','-k','-r','-b','-m','-g']
     # plot all branches
+
     for n in bl:
         (b,p) = ai.getBranch(n, True)
         # plot all parts
@@ -109,6 +111,7 @@ def plotDiag(file_name, axes = None, tr_file='', tr_cols=[],
                     ax.plot(b[p[i]:,2],b[p[i]:,5+ai.noVar],
                             c[int(b[p[i],0])])
             else:
+
                 ax.plot(b[p[i]:p[i+1],2],b[p[i]:p[i+1],5],c[int(b[p[i],0])])
                 # if the branch is periodic orbit, plot low value as well
                 #if b[p[i],1] < 0:
